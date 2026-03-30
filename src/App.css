@@ -1,0 +1,59 @@
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page {
+  padding: 20px;
+}
+
+.page h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.page p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.category-links {
+  margin-top: 40px;
+}
+
+.category-links h2 {
+  color: #444;
+  margin-bottom: 15px;
+}
+
+.category-links ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.category-links li a {
+  display: block;
+  padding: 15px 25px;
+  background: #646cff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.category-links li a:hover {
+  background: #535bf2;
+}
+
+.page a {
+  color: #646cff;
+  text-decoration: none;
+}
+
+.page a:hover {
+  text-decoration: underline;
+}
