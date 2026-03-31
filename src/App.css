@@ -57,3 +57,86 @@
 .page a:hover {
   text-decoration: underline;
 }
+
+.gemini-section {
+  margin: 30px 0;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.gemini-section button {
+  padding: 12px 24px;
+  background: #646cff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.gemini-section button:hover {
+  background: #535bf2;
+}
+
+.gemini-section button:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.gemini-response {
+  margin-top: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.gemini-response h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.gemini-response p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+#general-info {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.candidate-card {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.candidate-photo {
+  width: 120px;
+  height: 120px;
+  background: #ddd;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.candidate-text {
+  flex: 1;
+}
+
+.candidate-text h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.candidate-text p {
+  margin: 0;
+  color: #666;
+  line-height: 1.5;
+}
