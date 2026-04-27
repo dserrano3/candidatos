@@ -97,11 +97,6 @@
   color: #333;
 }
 
-.gemini-response p {
-  margin: 0;
-  white-space: pre-wrap;
-}
-
 #general-info {
   margin-top: 40px;
   display: flex;
@@ -136,7 +131,63 @@
 }
 
 .candidate-text p {
-  margin: 0;
+  margin: 0 0 10px 0;
   color: #666;
+  line-height: 1.6;
+}
+
+.candidate-text p:last-child {
+  margin-bottom: 0;
+}
+
+.candidate-text h4,
+.candidate-text h5 {
+  margin: 15px 0 8px 0;
+  color: #444;
+}
+
+.candidate-text ul,
+.candidate-text ol {
+  margin: 10px 0;
+  padding-left: 20px;
+  color: #666;
+}
+
+.candidate-text li {
+  margin-bottom: 5px;
   line-height: 1.5;
+}
+
+.candidate-text strong {
+  color: #333;
+}
+
+.gemini-response p {
+  margin: 0 0 10px 0;
+  line-height: 1.6;
+}
+
+.gemini-response p:last-child {
+  margin-bottom: 0;
+}
+
+.gemini-response h4,
+.gemini-response h5 {
+  margin: 15px 0 8px 0;
+  color: #444;
+}
+
+.gemini-response ul,
+.gemini-response ol {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.gemini-response li {
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.gemini-response strong {
+  color: #333;
 }

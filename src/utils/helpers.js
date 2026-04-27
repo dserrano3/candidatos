@@ -42,27 +42,31 @@ async function sendToGemini(query) {
 
 /**
  * Send a query to Gemini API using queries from the JSON file
- * @param {string} category - Category key in queries.json (e.g., "general", "names")
- * @param {number} queryIndex - Index of the query within the category
+ * @param {number} candidateIndex - Index of the candidate in names array
+ * @param {number} queryIndex - Index of the query in general array (0 for general info, 1 for escandalos)
  * @returns {Promise<string>} - Response text from Gemini
  */
-export async function sendGeneralQuery(candidateIndex) {
+export async function sendGeneralQuery(candidateIndex, queryIndex) {
 
-  const generalQuery = queries['general'][0]
+  const generalQuery = queries['general'][queryIndex]
   const candidateName = queries['names'][candidateIndex]
   const query = generalQuery.replace('<candidato>', candidateName)
 
   return sendToGemini(query)
 }
 
+// Candidate last names used across the app
+export const CANDIDATE_NAMES = ['Cepeda', 'Espriella', 'Valencia']
+
 /**
- * Save candidate data to Firestore
+ * Save data to a Firestore collection
+ * @param {string} collectionName - Name of the Firestore collection
  * @param {string} last_name - Candidate's last name
- * @param {string} general_summary - General summary about the candidate
+ * @param {string} general_summary - Summary about the candidate
  * @returns {Promise<string>} - Document ID of the created record
  */
-export async function saveCandidate(last_name, general_summary) {
-  const docRef = await addDoc(collection(db, 'Candidates'), {
+async function saveToCollection(collectionName, last_name, general_summary) {
+  const docRef = await addDoc(collection(db, collectionName), {
     last_name,
     general_summary,
     createdAt: new Date()
@@ -71,18 +75,17 @@ export async function saveCandidate(last_name, general_summary) {
 }
 
 /**
- * Get the most recent candidate summary by last name
+ * Get the most recent summary by last name from a collection
+ * @param {string} collectionName - Name of the Firestore collection
  * @param {string} last_name - Candidate's last name to search for
  * @returns {Promise<string|null>} - The general_summary or null if not found
  */
-export async function getCandidate(last_name) {
+async function getFromCollection(collectionName, last_name) {
   const q = query(
-    collection(db, 'Candidates'),
+    collection(db, collectionName),
     where('last_name', '==', last_name),
-    orderBy('createdAt', 'desc'),
     limit(1)
   )
-
   const querySnapshot = await getDocs(q)
 
   if (querySnapshot.empty) {
@@ -92,6 +95,43 @@ export async function getCandidate(last_name) {
   return querySnapshot.docs[0].data().general_summary
 }
 
-export function dummyFunction(param) {
-  return param
+// Convenience wrappers for Candidates collection
+export const saveCandidate = (last_name, summary) => saveToCollection('Candidates', last_name, summary)
+export const getCandidate = (last_name) => getFromCollection('Candidates', last_name)
+
+// Convenience wrappers for Escandalos collection
+export const saveEscandalo = (last_name, summary) => saveToCollection('Escandalos', last_name, summary)
+export const getEscandalo = (last_name) => getFromCollection('Escandalos', last_name)
+
+// Convenience wrappers for Experiencia collection
+export const saveExperiencia = (last_name, summary) => saveToCollection('Experiencia', last_name, summary)
+export const getExperiencia = (last_name) => getFromCollection('Experiencia', last_name)
+
+/**
+ * Load all candidates using the provided getter function
+ * @param {Function} getterFn - Function to get candidate data (e.g., getCandidate or getEscandalo)
+ * @returns {Promise<{cepeda: string, espriella: string, valencia: string}>}
+ */
+export async function loadAllCandidates(getterFn) {
+  const [cepeda, espriella, valencia] = await Promise.all(
+    CANDIDATE_NAMES.map(name => getterFn(name))
+  )
+  return {
+    cepeda: cepeda || 'No data available',
+    espriella: espriella || 'No data available',
+    valencia: valencia || 'No data available'
+  }
+}
+
+/**
+ * Fetch from Gemini and save all candidates
+ * @param {number} queryIndex - Index of the query (0 for general, 1 for escandalos)
+ * @param {Function} saveFn - Function to save candidate data
+ * @returns {Promise<void>}
+ */
+export async function fetchAndSaveAllCandidates(queryIndex, saveFn) {
+  for (let i = 0; i < CANDIDATE_NAMES.length; i++) {
+    const result = await sendGeneralQuery(i, queryIndex)
+    await saveFn(CANDIDATE_NAMES[i], result)
+  }
 }

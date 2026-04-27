@@ -1,6 +1,8 @@
 {
   "general": [
-    "En no mas de 20 lineas, quiero saber la informacion mas importante y relevante para elecciones del Candidato presidencial <candidato>"
+    "En no mas de 20 lineas, quiero saber la informacion mas importante y relevante para elecciones del Candidato presidencial <candidato>",
+    "En no mas de 20 lineas, quiero saber un resumen de todos los escandalos politicos y legales de <candidato>",
+    "En no mas de 20 lineas, quiero saber los cargos mas importantes que <candidato> ha ocupado. Has un simple resulmen de cada cargo ocupado."
   ],
-  "names": ["Gustavo Petro"]
+  "names": ["Ivan Cepeda", "Abelardo de la Espriella", "Paloma Valencia"]
 }

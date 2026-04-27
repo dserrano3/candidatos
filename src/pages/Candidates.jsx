@@ -1,27 +1,30 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { sendGeneralQuery, saveCandidate, getCandidate } from '../utils/helpers'
+import ReactMarkdown from 'react-markdown'
+import { loadAllCandidates, fetchAndSaveAllCandidates, getCandidate, saveCandidate } from '../utils/helpers'
 
 function Candidates() {
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
-  const [petroText, setPetroText] = useState('Loading...')
+  const [candidates, setCandidates] = useState({
+    cepeda: 'Loading...',
+    espriella: 'Loading...',
+    valencia: 'Loading...'
+  })
 
   useEffect(() => {
-    const loadPetro = async () => {
-      const summary = await getCandidate('Petro')
-      setPetroText(summary || 'No data available')
+    const load = async () => {
+      const data = await loadAllCandidates(getCandidate)
+      setCandidates(data)
     }
-    loadPetro()
+    load()
   }, [])
 
   const handleGeminiQuery = async () => {
     setLoading(true)
     setResponse('')
     try {
-      const result = await sendGeneralQuery(0)
-      await saveCandidate('Petro', result)
-      setResponse(result)
+      await fetchAndSaveAllCandidates(0, saveCandidate)
     } catch (error) {
       setResponse(`Error: ${error.message}`)
     }
@@ -40,7 +43,7 @@ function Candidates() {
         {response && (
           <div className="gemini-response">
             <h3>Response:</h3>
-            <p>{response}</p>
+            <ReactMarkdown>{response}</ReactMarkdown>
           </div>
         )}
       </div>
@@ -48,19 +51,27 @@ function Candidates() {
       <nav className="category-links">
         <h2>Categories</h2>
         <ul>
-          <li><Link to="/category1">Category 1</Link></li>
-          <li><Link to="/category2">Category 2</Link></li>
+          <li><Link to="/category1">Escandalos</Link></li>
+          <li><Link to="/category2">Experiencia</Link></li>
           <li><Link to="/category3">Category 3</Link></li>
           <li><Link to="/category4">Category 4</Link></li>
         </ul>
       </nav>
 
       <div id="general-info">
-        <div id="petro" className="candidate-card">
+        <div id="cepeda" className="candidate-card">
           <div className="candidate-photo"></div>
           <div className="candidate-text">
-            <h3>Petro</h3>
-            <p>{petroText}</p>
+            <h3>Cepeda</h3>
+            <ReactMarkdown>{candidates.cepeda}</ReactMarkdown>
+          </div>
+        </div>
+
+        <div id="espriella" className="candidate-card">
+          <div className="candidate-photo"></div>
+          <div className="candidate-text">
+            <h3>Espriella</h3>
+            <ReactMarkdown>{candidates.espriella}</ReactMarkdown>
           </div>
         </div>
 
@@ -68,15 +79,7 @@ function Candidates() {
           <div className="candidate-photo"></div>
           <div className="candidate-text">
             <h3>Valencia</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
-          </div>
-        </div>
-
-        <div id="cepeda" className="candidate-card">
-          <div className="candidate-photo"></div>
-          <div className="candidate-text">
-            <h3>Cepeda</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+            <ReactMarkdown>{candidates.valencia}</ReactMarkdown>
           </div>
         </div>
       </div>
