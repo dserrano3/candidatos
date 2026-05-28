@@ -6,6 +6,8 @@ Multiple Claude agents may work on this repo in parallel. Unrelated uncommitted 
 
 Use `@remixicon/react` for all icons — never hardcode inline SVGs.
 
+Use **Tailwind CSS v4** for all styling — no custom CSS classes. The Vite plugin (`@tailwindcss/vite`) is configured in `vite.config.js`; the import lives in `src/index.css`. Use `@tailwindcss/typography` (`prose` classes) for ReactMarkdown content. Keep custom CSS in `src/index.css` only for keyframe animations and base resets that Tailwind cannot express.
+
 ## Commands
 
 ```bash

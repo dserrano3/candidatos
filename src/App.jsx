@@ -5,11 +5,10 @@ import Category2 from './pages/Category2'
 import Category3 from './pages/Category3'
 import Category4 from './pages/Category4'
 import Category5 from './pages/Category5'
-import './App.css'
 
 function App() {
   return (
-    <div className="app">
+    <div className="max-w-[1100px] mx-auto px-5 py-5">
       <Routes>
         <Route path="/" element={<Candidates />} />
         <Route path="/category1" element={<Category1 />} />
