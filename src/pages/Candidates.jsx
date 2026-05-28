@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { loadAllCandidates, getCandidate } from '../utils/helpers'
+import Navigation from '../components/Navigation'
 import queries from '../utils/queries.json'
 
 const CANDIDATE_INFO = [
@@ -65,17 +65,7 @@ function Candidates() {
         <p>No hay financiación externa, todo es pagado por mí.</p>
       </header>
 
-      <nav className="category-links">
-        <h2>Categorías</h2>
-        <ul>
-          <li><Link to="/">Resumen</Link></li>
-          <li><Link to="/category1">Escándalos</Link></li>
-          <li><Link to="/category2">Experiencia</Link></li>
-          <li><Link to="/category3">Educación</Link></li>
-          <li><Link to="/category4">Salud</Link></li>
-          <li><Link to="/category5">Seguridad</Link></li>
-        </ul>
-      </nav>
+      <Navigation />
 
       <div id="general-info">
         {shuffledCandidates.map((candidate) => (
