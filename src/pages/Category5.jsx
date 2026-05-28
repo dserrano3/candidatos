@@ -20,9 +20,9 @@ function shuffle(array) {
 
 function Category5() {
   const [candidates, setCandidates] = useState({
-    cepeda: { summary: 'Loading...', sources: [] },
-    espriella: { summary: 'Loading...', sources: [] },
-    valencia: { summary: 'Loading...', sources: [] }
+    cepeda: { summary: 'Cargando...', sources: [] },
+    espriella: { summary: 'Cargando...', sources: [] },
+    valencia: { summary: 'Cargando...', sources: [] }
   })
 
   const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
@@ -63,7 +63,7 @@ function Category5() {
               <ReactMarkdown>{candidates[candidate.key].summary}</ReactMarkdown>
               {candidates[candidate.key].sources.length > 0 && (
                 <div className="sources">
-                  <div className="sources-title">Sources</div>
+                  <div className="sources-title">Fuentes</div>
                   <ul className="sources-list">
                     {candidates[candidate.key].sources.map((source, idx) => (
                       <li key={idx}>

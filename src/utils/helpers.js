@@ -52,8 +52,8 @@ export async function loadAllCandidates(getterFn) {
     CANDIDATE_NAMES.map(name => getterFn(name))
   )
   return {
-    cepeda: cepeda || { summary: 'No data available', sources: [] },
-    espriella: espriella || { summary: 'No data available', sources: [] },
-    valencia: valencia || { summary: 'No data available', sources: [] }
+    cepeda: cepeda || { summary: 'No hay datos disponibles', sources: [] },
+    espriella: espriella || { summary: 'No hay datos disponibles', sources: [] },
+    valencia: valencia || { summary: 'No hay datos disponibles', sources: [] }
   }
 }

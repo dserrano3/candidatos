@@ -1,11 +1,11 @@
 {
   "general": [
-    "En no mas de 20 lineas, quiero saber la informacion mas importante y relevante para elecciones del Candidato presidencial <candidato>",
-    "En no mas de 20 lineas, quiero saber un resumen de todos los escandalos politicos y legales de <candidato>",
-    "En no mas de 20 lineas, quiero saber los cargos mas importantes que <candidato> ha ocupado. Has un simple resulmen de cada cargo ocupado.",
-    "En no mas de 20 lineas, quiero saber las propuestas de educacion que <candidato> tiene para las elecciones de Colombia.",
-    "En no mas de 20 lineas, quiero saber las propuestas de salud que <candidato> tiene para las elecciones de Colombia.",
-    "En no mas de 20 lineas, quiero saber las propuestas de seguridad que <candidato> tiene para las elecciones de Colombia."
+    "En no más de 20 líneas, quiero saber la información más importante y relevante para elecciones del Candidato presidencial <candidato>",
+    "En no más de 20 líneas, quiero saber un resumen de todos los escándalos políticos y legales de <candidato>",
+    "En no más de 20 líneas, quiero saber los cargos más importantes que <candidato> ha ocupado. Haz un simple resumen de cada cargo ocupado.",
+    "En no más de 20 líneas, quiero saber las propuestas de educación que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 20 líneas, quiero saber las propuestas de salud que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 20 líneas, quiero saber las propuestas de seguridad que <candidato> tiene para las elecciones de Colombia."
   ],
-  "names": ["Ivan Cepeda", "Abelardo de la Espriella", "Paloma Valencia"]
+  "names": ["Iván Cepeda", "Abelardo de la Espriella", "Paloma Valencia"]
 }

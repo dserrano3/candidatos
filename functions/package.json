@@ -1,6 +1,6 @@
 {
   "name": "candidatos-functions",
-  "description": "Firebase Cloud Functions for Candidatos App",
+  "description": "Firebase Cloud Functions for Elecciones Colombia AI",
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
