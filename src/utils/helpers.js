@@ -111,6 +111,7 @@ async function getFromCollection(collectionName, last_name) {
   const q = query(
     collection(db, collectionName),
     where('last_name', '==', last_name),
+    orderBy('createdAt', 'desc'),
     limit(1)
   )
   const querySnapshot = await getDocs(q)
