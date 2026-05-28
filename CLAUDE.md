@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+Multiple Claude agents may work on this repo in parallel. Unrelated uncommitted changes in the working directory are expected and normal — do not discard or overwrite them.
+
 ## Commands
 
 ```bash
