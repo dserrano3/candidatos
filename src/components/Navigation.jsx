@@ -20,7 +20,10 @@ function Navigation() {
   return (
     <nav className="navigation">
       <div className="nav-header">
-        <h2>Categorías</h2>
+        <div className="nav-title-group">
+          <h2>Historia de los candidatos y propuestas.</h2>
+          <p className="nav-subtitle">Conoce a los candidatos y decide tu voto en menos de 20 minutos.</p>
+        </div>
         <button
           className={`hamburger ${isOpen ? 'open' : ''}`}
           onClick={toggleMenu}
