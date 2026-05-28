@@ -1,0 +1,19 @@
+# Compiled JavaScript files
+lib/**/*.js
+lib/**/*.js.map
+
+# Dependencies
+node_modules/
+
+# Local config files
+*.local
+.env
+.env.*
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

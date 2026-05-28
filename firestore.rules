@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Read-only access for frontend - only Cloud Functions can write
+    match /Candidates/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /Escandalos/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /Experiencia/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /Educacion/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /Salud/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /Seguridad/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}

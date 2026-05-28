@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import { loadAllCandidates, fetchAndSaveAllCandidates, getEducacion, saveEducacion } from '../utils/helpers'
+import { loadAllCandidates, getEducacion } from '../utils/helpers'
 
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
@@ -19,8 +19,6 @@ function shuffle(array) {
 }
 
 function Category3() {
-  const [response, setResponse] = useState('')
-  const [loading, setLoading] = useState(false)
   const [candidates, setCandidates] = useState({
     cepeda: { summary: 'Loading...', sources: [] },
     espriella: { summary: 'Loading...', sources: [] },
@@ -37,36 +35,10 @@ function Category3() {
     load()
   }, [])
 
-  const handleGeminiQuery = async () => {
-    setLoading(true)
-    setResponse('')
-    try {
-      await fetchAndSaveAllCandidates(3, saveEducacion)
-      // Reload data after saving
-      const data = await loadAllCandidates(getEducacion)
-      setCandidates(data)
-    } catch (error) {
-      setResponse(`Error: ${error.message}`)
-    }
-    setLoading(false)
-  }
-
   return (
     <div className="page">
       <h1>Educación</h1>
       <p>Resumen de las propuestas de educación de los candidatos.</p>
-
-      <div className="gemini-section">
-        <button onClick={handleGeminiQuery} disabled={loading}>
-          {loading ? 'Loading...' : 'Ask Gemini'}
-        </button>
-        {response && (
-          <div className="gemini-response">
-            <h3>Response:</h3>
-            <ReactMarkdown>{response}</ReactMarkdown>
-          </div>
-        )}
-      </div>
 
       <nav className="category-links">
         <h2>Categorías</h2>
