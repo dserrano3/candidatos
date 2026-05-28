@@ -107,6 +107,18 @@ export const getEscandalo = (last_name) => getFromCollection('Escandalos', last_
 export const saveExperiencia = (last_name, summary) => saveToCollection('Experiencia', last_name, summary)
 export const getExperiencia = (last_name) => getFromCollection('Experiencia', last_name)
 
+// Convenience wrappers for Educacion collection
+export const saveEducacion = (last_name, summary) => saveToCollection('Educacion', last_name, summary)
+export const getEducacion = (last_name) => getFromCollection('Educacion', last_name)
+
+// Convenience wrappers for Salud collection
+export const saveSalud = (last_name, summary) => saveToCollection('Salud', last_name, summary)
+export const getSalud = (last_name) => getFromCollection('Salud', last_name)
+
+// Convenience wrappers for Seguridad collection
+export const saveSeguridad = (last_name, summary) => saveToCollection('Seguridad', last_name, summary)
+export const getSeguridad = (last_name) => getFromCollection('Seguridad', last_name)
+
 /**
  * Load all candidates using the provided getter function
  * @param {Function} getterFn - Function to get candidate data (e.g., getCandidate or getEscandalo)

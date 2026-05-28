@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
-import { loadAllCandidates, fetchAndSaveAllCandidates, getCandidate, saveCandidate } from '../utils/helpers'
+import { loadAllCandidates, fetchAndSaveAllCandidates, getSeguridad, saveSeguridad } from '../utils/helpers'
 
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
@@ -18,7 +18,7 @@ function shuffle(array) {
   return shuffled
 }
 
-function Candidates() {
+function Category5() {
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
   const [candidates, setCandidates] = useState({
@@ -31,7 +31,7 @@ function Candidates() {
 
   useEffect(() => {
     const load = async () => {
-      const data = await loadAllCandidates(getCandidate)
+      const data = await loadAllCandidates(getSeguridad)
       setCandidates(data)
     }
     load()
@@ -41,7 +41,7 @@ function Candidates() {
     setLoading(true)
     setResponse('')
     try {
-      await fetchAndSaveAllCandidates(0, saveCandidate)
+      await fetchAndSaveAllCandidates(5, saveSeguridad)
     } catch (error) {
       setResponse(`Error: ${error.message}`)
     }
@@ -50,10 +50,8 @@ function Candidates() {
 
   return (
     <div className="page">
-      <header className="page-header">
-        <h1>Candidatos Presidenciales</h1>
-        <p>Informacion sobre los candidatos a la presidencia de Colombia</p>
-      </header>
+      <h1>Seguridad</h1>
+      <p>Resumen de las propuestas de seguridad de los candidatos.</p>
 
       <div className="gemini-section">
         <button onClick={handleGeminiQuery} disabled={loading}>
@@ -67,16 +65,7 @@ function Candidates() {
         )}
       </div>
 
-      <nav className="category-links">
-        <h2>Categories</h2>
-        <ul>
-          <li><Link to="/category1">Escandalos</Link></li>
-          <li><Link to="/category2">Experiencia</Link></li>
-          <li><Link to="/category3">Educacion</Link></li>
-          <li><Link to="/category4">Salud</Link></li>
-          <li><Link to="/category5">Seguridad</Link></li>
-        </ul>
-      </nav>
+      <Link to="/">← Back to Candidates</Link>
 
       <div id="general-info">
         {shuffledCandidates.map((candidate) => (
@@ -95,4 +84,4 @@ function Candidates() {
   )
 }
 
-export default Candidates
+export default Category5

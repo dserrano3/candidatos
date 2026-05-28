@@ -1,7 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import { loadAllCandidates, fetchAndSaveAllCandidates, getEscandalo, saveEscandalo } from '../utils/helpers'
+
+const CANDIDATE_INFO = [
+  { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
+  { key: 'espriella', name: 'Espriella', image: '/espriella.jpg' },
+  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' }
+]
+
+function shuffle(array) {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
 
 function Category1() {
   const [response, setResponse] = useState('')
@@ -11,6 +26,8 @@ function Category1() {
     espriella: 'Loading...',
     valencia: 'Loading...'
   })
+
+  const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
 
   useEffect(() => {
     const load = async () => {
@@ -51,29 +68,17 @@ function Category1() {
       <Link to="/">← Back to Candidates</Link>
 
       <div id="general-info">
-        <div id="cepeda" className="candidate-card">
-          <div className="candidate-photo"></div>
-          <div className="candidate-text">
-            <h3>Cepeda</h3>
-            <ReactMarkdown>{candidates.cepeda}</ReactMarkdown>
+        {shuffledCandidates.map((candidate) => (
+          <div key={candidate.key} id={candidate.key} className="candidate-card">
+            <div className="candidate-photo">
+              <img src={candidate.image} alt={candidate.name} />
+            </div>
+            <div className="candidate-text">
+              <h3>{candidate.name}</h3>
+              <ReactMarkdown>{candidates[candidate.key]}</ReactMarkdown>
+            </div>
           </div>
-        </div>
-
-        <div id="espriella" className="candidate-card">
-          <div className="candidate-photo"></div>
-          <div className="candidate-text">
-            <h3>Espriella</h3>
-            <ReactMarkdown>{candidates.espriella}</ReactMarkdown>
-          </div>
-        </div>
-
-        <div id="valencia" className="candidate-card">
-          <div className="candidate-photo"></div>
-          <div className="candidate-text">
-            <h3>Valencia</h3>
-            <ReactMarkdown>{candidates.valencia}</ReactMarkdown>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   )
