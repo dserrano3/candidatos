@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Multiple Claude agents may work on this repo in parallel. Unrelated uncommitted changes in the working directory are expected and normal — do not discard or overwrite them.
 
+Use `@remixicon/react` for all icons — never hardcode inline SVGs.
+
 ## Commands
 
 ```bash
@@ -75,3 +77,15 @@ React 19 + Vite SPA with React Router DOM. No auth — read-only Firestore acces
 - `functions/src/firestore.js` — Firestore write logic via Firebase Admin SDK
 
 **Gemini API key** is stored as a Firebase Functions parameter (`GEMINI_API_KEY`), not in source code. Set it with `firebase functions:config:set` or via the Firebase Console.
+
+## Copy & language
+
+All UI text is in **Spanish**. Target audience is the everyday Colombian voter — not tech-savvy, not politically expert, just someone trying to make a decision before election day.
+
+Rules for writing any copy in this project:
+- **Benefit-first**: lead with what the user gets or feels ("¿No sabes por quién votar?"), not with what the tool does.
+- **Short sentences**: if a sentence needs a comma, consider splitting it.
+- **Plain words**: "sin rumores" beats "sin sesgo"; "te ayuda a decidir" beats "facilita la toma de decisiones".
+- **Direct "tú"**: always address the user as "tú", never "usted" or impersonal constructions.
+- **No repetition**: say each idea once. Repeating the same point in different words reads as noise.
+- **IA not AI**: use "IA" (Spanish acronym) in body text; "AI" is acceptable only in the product name "Elecciones Colombia AI".
