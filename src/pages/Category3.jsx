@@ -22,9 +22,9 @@ function Category3() {
   const [response, setResponse] = useState('')
   const [loading, setLoading] = useState(false)
   const [candidates, setCandidates] = useState({
-    cepeda: 'Loading...',
-    espriella: 'Loading...',
-    valencia: 'Loading...'
+    cepeda: { summary: 'Loading...', sources: [] },
+    espriella: { summary: 'Loading...', sources: [] },
+    valencia: { summary: 'Loading...', sources: [] }
   })
 
   const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
@@ -42,6 +42,9 @@ function Category3() {
     setResponse('')
     try {
       await fetchAndSaveAllCandidates(3, saveEducacion)
+      // Reload data after saving
+      const data = await loadAllCandidates(getEducacion)
+      setCandidates(data)
     } catch (error) {
       setResponse(`Error: ${error.message}`)
     }
@@ -50,8 +53,8 @@ function Category3() {
 
   return (
     <div className="page">
-      <h1>Educacion</h1>
-      <p>Resumen de las propuestas de educacion de los candidatos.</p>
+      <h1>Educación</h1>
+      <p>Resumen de las propuestas de educación de los candidatos.</p>
 
       <div className="gemini-section">
         <button onClick={handleGeminiQuery} disabled={loading}>
@@ -65,7 +68,17 @@ function Category3() {
         )}
       </div>
 
-      <Link to="/">← Back to Candidates</Link>
+      <nav className="category-links">
+        <h2>Categorías</h2>
+        <ul>
+          <li><Link to="/">Resumen</Link></li>
+          <li><Link to="/category1">Escándalos</Link></li>
+          <li><Link to="/category2">Experiencia</Link></li>
+          <li><Link to="/category3">Educación</Link></li>
+          <li><Link to="/category4">Salud</Link></li>
+          <li><Link to="/category5">Seguridad</Link></li>
+        </ul>
+      </nav>
 
       <div id="general-info">
         {shuffledCandidates.map((candidate) => (
@@ -75,7 +88,21 @@ function Category3() {
             </div>
             <div className="candidate-text">
               <h3>{candidate.name}</h3>
-              <ReactMarkdown>{candidates[candidate.key]}</ReactMarkdown>
+              <ReactMarkdown>{candidates[candidate.key].summary}</ReactMarkdown>
+              {candidates[candidate.key].sources.length > 0 && (
+                <div className="sources">
+                  <div className="sources-title">Sources</div>
+                  <ul className="sources-list">
+                    {candidates[candidate.key].sources.map((source, idx) => (
+                      <li key={idx}>
+                        <a href={source.url} target="_blank" rel="noopener noreferrer">
+                          {source.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         ))}

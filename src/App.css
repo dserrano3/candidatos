@@ -34,14 +34,70 @@ body {
   color: #1a1a2e;
   font-size: 2.5rem;
   font-weight: 700;
-  margin: 0 0 10px 0;
+  margin: 0 0 20px 0;
   letter-spacing: -0.5px;
 }
 
 .page-header p {
   color: #6b7280;
+  font-size: 1rem;
+  margin: 0 0 12px 0;
+  text-align: left;
+  line-height: 1.6;
+}
+
+.page-header p:first-of-type {
   font-size: 1.1rem;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.page-header p:last-of-type {
+  margin-bottom: 0;
+}
+
+/* Questions section in header */
+.questions-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.questions-section h3 {
+  color: #1a1a2e;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.questions-list {
+  list-style: none;
+  padding: 0;
   margin: 0;
+}
+
+.questions-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  color: #4b5563;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.questions-list li:last-child {
+  margin-bottom: 0;
+}
+
+.questions-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
 }
 
 .page h1 {
@@ -303,6 +359,55 @@ body {
 
 .back-link:hover {
   color: #059669;
+}
+
+/* Sources section */
+.sources {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.sources-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sources-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sources-list li {
+  margin: 0;
+}
+
+.sources-list a {
+  display: inline-block;
+  padding: 4px 10px;
+  background: #f3f4f6;
+  color: #4b5563;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sources-list a:hover {
+  background: #10b981;
+  color: white;
 }
 
 /* Responsive adjustments */
