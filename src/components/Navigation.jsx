@@ -24,7 +24,7 @@ function Navigation({ onInfoClick }) {
         <div className="flex flex-col gap-1 text-left">
           <div className="flex items-center gap-2">
             <h2 className="text-[#1a1a2e] text-[2.4rem] max-md:text-[1.6rem] font-bold leading-[1.15] tracking-tight m-0">
-              Historia de los candidatos y propuestas.
+              Decide Tu Voto
             </h2>
             {onInfoClick && (
               <button
@@ -36,6 +36,9 @@ function Navigation({ onInfoClick }) {
               </button>
             )}
           </div>
+          <p className="text-gray-400 text-[0.8rem] font-medium uppercase tracking-wide m-0">
+            Elecciones presidenciales Colombia 2026
+          </p>
           <p className="text-gray-500 text-[0.85rem] m-0">
             Conoce a los candidatos, entiende sus propuestas y decide tu voto con confianza — todo en menos de 20 minutos.
           </p>

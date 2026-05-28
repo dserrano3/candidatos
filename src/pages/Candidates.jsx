@@ -80,7 +80,7 @@ function Candidates() {
             <p className="text-sm text-gray-700 leading-relaxed m-0 text-left">El orden es al azar, la info se actualiza cada 24 horas y las preguntas son las mismas para todos.</p>
             <div className="mt-6 p-5 bg-gradient-to-br from-slate-50 to-slate-100 rounded-[10px] border border-slate-200 text-left max-md:mt-5 max-md:p-4">
               <h3 className="text-[#1a1a2e] text-base font-semibold mt-0 mb-3 max-md:text-sm">
-                Preguntas que se le hacen al AI:
+                Preguntas que se le hacen a la IA:
               </h3>
               <ul className="list-none p-0 m-0">
                 {queries.general.map((question, idx) => (
