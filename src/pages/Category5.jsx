@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { RiArrowDownSLine } from '@remixicon/react'
 import { loadAllCandidates, getSeguridad } from '../utils/helpers'
 import Navigation from '../components/Navigation'
 
@@ -29,6 +30,7 @@ function Category5() {
     lopez: null
   })
 
+  const [collapsed, setCollapsed] = useState({})
   const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
 
   useEffect(() => {
@@ -57,31 +59,44 @@ function Category5() {
               <img src={candidate.image} alt={candidate.name} className="w-full h-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="mt-0 mb-3 text-[#1a1a2e] text-xl font-semibold max-md:text-[1.15rem] max-[480px]:text-[1.1rem]">
-                {candidate.name}
-              </h3>
-              <div className="prose prose-sm max-w-none prose-headings:text-[#1a1a2e] prose-p:text-gray-600 prose-p:leading-[1.7] prose-li:text-gray-600 prose-strong:text-[#1a1a2e] prose-em:text-gray-500 prose-a:text-emerald-500 max-md:text-left">
-                <ReactMarkdown>{candidates[candidate.key].summary}</ReactMarkdown>
+              <div className="flex items-center justify-between max-md:justify-center max-md:gap-2">
+                <h3 className="mt-0 mb-0 text-[#1a1a2e] text-xl font-semibold max-md:text-[1.15rem] max-[480px]:text-[1.1rem]">
+                  {candidate.name}
+                </h3>
+                <button
+                  onClick={() => setCollapsed(prev => ({ ...prev, [candidate.key]: !prev[candidate.key] }))}
+                  className="ml-2 max-md:ml-0 shrink-0 p-1 text-gray-400 hover:text-[#1a1a2e] transition-colors duration-200"
+                  aria-label={collapsed[candidate.key] ? 'Expandir' : 'Colapsar'}
+                >
+                  <RiArrowDownSLine size={20} className={`transition-transform duration-300 ${collapsed[candidate.key] ? '-rotate-90' : ''}`} />
+                </button>
               </div>
-              {candidates[candidate.key].sources.length > 0 && (
-                <div className="mt-4 pt-3 border-t border-gray-200">
-                  <div className="text-[0.8rem] font-semibold text-gray-500 mb-2 uppercase tracking-[0.5px]">
-                    Fuentes
+              {!collapsed[candidate.key] && (
+                <div className="mt-3">
+                  <div className="prose prose-sm max-w-none prose-headings:text-[#1a1a2e] prose-p:text-gray-600 prose-p:leading-[1.7] prose-li:text-gray-600 prose-strong:text-[#1a1a2e] prose-em:text-gray-500 prose-a:text-emerald-500 max-md:text-left">
+                    <ReactMarkdown>{candidates[candidate.key].summary}</ReactMarkdown>
                   </div>
-                  <ul className="flex flex-wrap gap-2 list-none p-0 m-0 max-md:gap-1.5">
-                    {candidates[candidate.key].sources.map((source, idx) => (
-                      <li key={idx}>
-                        <a
-                          href={source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-block py-1 px-2.5 bg-gray-100 text-gray-600 text-[0.8rem] rounded-md no-underline transition-all duration-200 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap hover:bg-emerald-500 hover:text-white max-md:text-[0.75rem] max-md:py-1 max-md:px-2 max-md:max-w-[150px]"
-                        >
-                          {source.title}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  {candidates[candidate.key].sources.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-gray-200">
+                      <div className="text-[0.8rem] font-semibold text-gray-500 mb-2 uppercase tracking-[0.5px]">
+                        Fuentes
+                      </div>
+                      <ul className="flex flex-wrap gap-2 list-none p-0 m-0 max-md:gap-1.5">
+                        {candidates[candidate.key].sources.map((source, idx) => (
+                          <li key={idx}>
+                            <a
+                              href={source.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-block py-1 px-2.5 bg-gray-100 text-gray-600 text-[0.8rem] rounded-md no-underline transition-all duration-200 max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap hover:bg-emerald-500 hover:text-white max-md:text-[0.75rem] max-md:py-1 max-md:px-2 max-md:max-w-[150px]"
+                            >
+                              {source.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
