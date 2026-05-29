@@ -25,14 +25,14 @@ async function updateCategory(categoryIndex) {
       console.log(`Saving data for ${CANDIDATE_NAMES[i]} to ${collectionName}...`);
       const docId = await saveToCollection(collectionName, CANDIDATE_NAMES[i], result.text, result.sources);
       console.log(`Saved document ${docId} for ${CANDIDATE_NAMES[i]}`);
-
-      // Wait 5 seconds between requests to avoid rate limiting
-      if (i < CANDIDATE_NAMES.length - 1) {
-        console.log('Waiting 5 seconds before next request...');
-        await delay(5000);
-      }
     } catch (error) {
       console.error(`Error processing ${CANDIDATE_NAMES[i]}:`, error);
+    }
+
+    // Always delay between requests — even after errors — to avoid rate limiting
+    if (i < CANDIDATE_NAMES.length - 1) {
+      console.log('Waiting 12 seconds before next request...');
+      await delay(12000);
     }
   }
 
@@ -43,7 +43,8 @@ async function updateCategory(categoryIndex) {
 exports.updateCandidates = onSchedule({
   schedule: '0 5 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(0);
 });
@@ -52,7 +53,8 @@ exports.updateCandidates = onSchedule({
 exports.updateEscandalos = onSchedule({
   schedule: '0 9 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(1);
 });
@@ -61,7 +63,8 @@ exports.updateEscandalos = onSchedule({
 exports.updateExperiencia = onSchedule({
   schedule: '0 13 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(2);
 });
@@ -70,7 +73,8 @@ exports.updateExperiencia = onSchedule({
 exports.updateEducacion = onSchedule({
   schedule: '0 17 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(3);
 });
@@ -79,7 +83,8 @@ exports.updateEducacion = onSchedule({
 exports.updateSalud = onSchedule({
   schedule: '0 21 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(4);
 });
@@ -88,7 +93,8 @@ exports.updateSalud = onSchedule({
 exports.updateSeguridad = onSchedule({
   schedule: '0 1 * * *',
   timeZone: 'America/Bogota',
-  region: 'us-central1'
+  region: 'us-central1',
+  timeoutSeconds: 300
 }, async (event) => {
   await updateCategory(5);
 });
@@ -96,7 +102,8 @@ exports.updateSeguridad = onSchedule({
 // HTTP trigger for manual updates
 exports.manualUpdate = onRequest({
   region: 'us-central1',
-  cors: true
+  cors: true,
+  timeoutSeconds: 300
 }, async (req, res) => {
   const categoryParam = req.query.category;
 
