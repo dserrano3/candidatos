@@ -6,7 +6,9 @@ import Navigation from '../components/Navigation'
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
   { key: 'espriella', name: 'Espriella', image: '/espriella.jpg' },
-  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' }
+  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' },
+  { key: 'fajardo', name: 'Fajardo', image: '/fajardo.jpg' },
+  { key: 'lopez', name: 'López', image: '/lopez.png' }
 ]
 
 function shuffle(array) {
@@ -22,7 +24,9 @@ function Category1() {
   const [candidates, setCandidates] = useState({
     cepeda: { summary: 'Cargando...', sources: [] },
     espriella: { summary: 'Cargando...', sources: [] },
-    valencia: { summary: 'Cargando...', sources: [] }
+    valencia: { summary: 'Cargando...', sources: [] },
+    fajardo: null,
+    lopez: null
   })
 
   const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
@@ -43,7 +47,7 @@ function Category1() {
       <Navigation />
 
       <div className="mt-10 flex flex-col gap-6 max-md:mt-6 max-md:gap-4">
-        {shuffledCandidates.map((candidate) => (
+        {shuffledCandidates.filter(c => candidates[c.key] !== null).map((candidate) => (
           <div
             key={candidate.key}
             id={candidate.key}

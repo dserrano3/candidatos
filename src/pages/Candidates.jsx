@@ -8,7 +8,9 @@ import queries from '../utils/queries.json'
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
   { key: 'espriella', name: 'Espriella', image: '/espriella.jpg' },
-  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' }
+  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' },
+  { key: 'fajardo', name: 'Fajardo', image: '/fajardo.jpg' },
+  { key: 'lopez', name: 'López', image: '/lopez.png' }
 ]
 
 function shuffle(array) {
@@ -24,7 +26,9 @@ function Candidates() {
   const [candidates, setCandidates] = useState({
     cepeda: { summary: 'Cargando...', sources: [] },
     espriella: { summary: 'Cargando...', sources: [] },
-    valencia: { summary: 'Cargando...', sources: [] }
+    valencia: { summary: 'Cargando...', sources: [] },
+    fajardo: null,
+    lopez: null
   })
   const [showPopup, setShowPopup] = useState(() => !localStorage.getItem('elecciones_visited'))
   const [isClosing, setIsClosing] = useState(false)
@@ -118,7 +122,7 @@ function Candidates() {
       <Navigation onInfoClick={openPopup} />
 
       <div className="mt-10 flex flex-col gap-6 max-md:mt-6 max-md:gap-4">
-        {shuffledCandidates.map((candidate) => (
+        {shuffledCandidates.filter(c => candidates[c.key] !== null).map((candidate) => (
           <div
             key={candidate.key}
             id={candidate.key}

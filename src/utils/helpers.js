@@ -6,7 +6,7 @@ import { collection, query, where, orderBy, limit, getDocs } from 'firebase/fire
 import { db } from '../config/firebase'
 
 // Candidate last names used across the app
-export const CANDIDATE_NAMES = ['Cepeda', 'Espriella', 'Valencia']
+export const CANDIDATE_NAMES = ['Cepeda', 'Espriella', 'Valencia', 'Fajardo', 'Lopez']
 
 /**
  * Get the most recent summary and sources by last name from a collection
@@ -43,17 +43,14 @@ export const getSalud = (last_name) => getFromCollection('Salud', last_name)
 export const getSeguridad = (last_name) => getFromCollection('Seguridad', last_name)
 
 /**
- * Load all candidates using the provided getter function
+ * Load all candidates using the provided getter function.
+ * Returns null for candidates with no data in the DB — callers should skip rendering those.
  * @param {Function} getterFn - Function to get candidate data (e.g., getCandidate or getEscandalo)
- * @returns {Promise<{cepeda: object, espriella: object, valencia: object}>}
+ * @returns {Promise<Record<string, {summary: string, sources: Array}|null>>}
  */
 export async function loadAllCandidates(getterFn) {
-  const [cepeda, espriella, valencia] = await Promise.all(
-    CANDIDATE_NAMES.map(name => getterFn(name))
+  const results = await Promise.all(CANDIDATE_NAMES.map(name => getterFn(name)))
+  return Object.fromEntries(
+    CANDIDATE_NAMES.map((name, i) => [name.toLowerCase(), results[i]])
   )
-  return {
-    cepeda: cepeda || { summary: 'No hay datos disponibles', sources: [] },
-    espriella: espriella || { summary: 'No hay datos disponibles', sources: [] },
-    valencia: valencia || { summary: 'No hay datos disponibles', sources: [] }
-  }
 }
