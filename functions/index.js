@@ -4,8 +4,8 @@ const { defineString } = require('firebase-functions/params');
 const { sendGeneralQuery, delay, CANDIDATE_NAMES } = require('./src/gemini');
 const { saveToCollection, getCollectionName, COLLECTIONS } = require('./src/firestore');
 
-// Define the Gemini API key parameter
 const geminiApiKey = defineString('GEMINI_API_KEY');
+const updateSecret = defineString('MANUAL_UPDATE_SECRET');
 
 /**
  * Fetch from Gemini and save all candidates for a given category
@@ -105,6 +105,11 @@ exports.manualUpdate = onRequest({
   cors: true,
   timeoutSeconds: 540
 }, async (req, res) => {
+  if (req.query.secret !== updateSecret.value()) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
+
   const categoryParam = req.query.category;
 
   if (categoryParam === undefined) {
