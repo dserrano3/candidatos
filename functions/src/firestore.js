@@ -32,7 +32,8 @@ const COLLECTIONS = [
   'Experiencia',   // 2 - Experiencia
   'Educacion',     // 3 - Educación
   'Salud',         // 4 - Salud
-  'Seguridad'      // 5 - Seguridad
+  'Seguridad',     // 5 - Seguridad
+  'Energia'        // 6 - Energía y cambio climático
 ];
 
 /**

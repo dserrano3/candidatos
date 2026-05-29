@@ -99,6 +99,16 @@ exports.updateSeguridad = onSchedule({
   await updateCategory(5);
 });
 
+// Scheduled function: Update Energia - runs at 22:00 Colombia time (03:00 UTC next day)
+exports.updateEnergia = onSchedule({
+  schedule: '0 3 * * *',
+  timeZone: 'America/Bogota',
+  region: 'us-central1',
+  timeoutSeconds: 540
+}, async (event) => {
+  await updateCategory(6);
+});
+
 // HTTP trigger for manual updates
 exports.manualUpdate = onRequest({
   region: 'us-central1',
@@ -122,10 +132,10 @@ exports.manualUpdate = onRequest({
 
   const categoryIndex = parseInt(categoryParam, 10);
 
-  if (isNaN(categoryIndex) || categoryIndex < 0 || categoryIndex > 5) {
+  if (isNaN(categoryIndex) || categoryIndex < 0 || categoryIndex > 6) {
     res.status(400).json({
       error: 'Invalid category parameter',
-      valid: '0=Candidates, 1=Escandalos, 2=Experiencia, 3=Educacion, 4=Salud, 5=Seguridad'
+      valid: '0=Candidates, 1=Escandalos, 2=Experiencia, 3=Educacion, 4=Salud, 5=Seguridad, 6=Energia'
     });
     return;
   }

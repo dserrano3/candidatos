@@ -32,5 +32,10 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
+
+    match /Energia/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
   }
 }

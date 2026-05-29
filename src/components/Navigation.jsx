@@ -8,7 +8,8 @@ const NAV_ITEMS = [
   { path: '/category2', label: 'Experiencia' },
   { path: '/category3', label: 'Educación' },
   { path: '/category4', label: 'Salud' },
-  { path: '/category5', label: 'Seguridad' }
+  { path: '/category5', label: 'Seguridad' },
+  { path: '/category6', label: 'Energía' }
 ]
 
 function Navigation({ onInfoClick }) {

@@ -41,6 +41,7 @@ export const getExperiencia = (last_name) => getFromCollection('Experiencia', la
 export const getEducacion = (last_name) => getFromCollection('Educacion', last_name)
 export const getSalud = (last_name) => getFromCollection('Salud', last_name)
 export const getSeguridad = (last_name) => getFromCollection('Seguridad', last_name)
+export const getEnergia = (last_name) => getFromCollection('Energia', last_name)
 
 /**
  * Load all candidates using the provided getter function.
