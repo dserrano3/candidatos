@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import { RiArrowDownSLine } from '@remixicon/react'
 import { loadAllCandidates, getEscandalo } from '../utils/helpers'
 import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
@@ -104,6 +105,7 @@ function Category1() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   )
 }

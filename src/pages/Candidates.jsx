@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import { RiGithubFill, RiArrowDownSLine } from '@remixicon/react'
 import { loadAllCandidates, getCandidate } from '../utils/helpers'
 import Navigation from '../components/Navigation'
+import Footer from '../components/Footer'
 import queries from '../utils/queries.json'
 
 const CANDIDATE_INFO = [
@@ -109,7 +110,7 @@ function Candidates() {
                 <RiGithubFill size={20} style={{ verticalAlign: 'middle' }} />
               </a>
             </p>
-            <p className="text-sm text-gray-700 leading-relaxed m-0 text-left">No hay financiación externa, todo es pagado por mí.</p>
+            <p className="text-sm text-gray-700 leading-relaxed m-0 text-left">No hay financiación externa, todo es pagado por un colombiano sin relacion a la politica.</p>
             <button
               className="mt-2 bg-[#1a1a2e] text-white border-none rounded-xl py-3.5 px-6 text-base font-semibold cursor-pointer w-full transition-colors duration-200 hover:bg-[#16213e]"
               onClick={closePopup}
@@ -178,6 +179,7 @@ function Candidates() {
           </div>
         ))}
       </div>
+      <Footer />
     </div>
   )
 }
