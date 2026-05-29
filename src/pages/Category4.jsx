@@ -30,7 +30,7 @@ function Category4() {
     lopez: null
   })
 
-  const [collapsed, setCollapsed] = useState({})
+  const [collapsed, setCollapsed] = useState(() => Object.fromEntries(CANDIDATE_INFO.map(c => [c.key, true])))
   const shuffledCandidates = useMemo(() => shuffle(CANDIDATE_INFO), [])
 
   useEffect(() => {
@@ -53,7 +53,8 @@ function Category4() {
           <div
             key={candidate.key}
             id={candidate.key}
-            className="flex gap-6 p-6 bg-gradient-to-br from-white to-slate-50 rounded-[14px] border border-slate-200 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 max-[900px]:gap-5 max-[900px]:p-5 max-md:flex-col max-md:items-center max-md:text-center max-md:gap-4 max-md:p-5 max-[480px]:p-4"
+            onClick={() => collapsed[candidate.key] && setCollapsed(prev => ({ ...prev, [candidate.key]: false }))}
+            className={`flex gap-6 p-6 bg-gradient-to-br from-white to-slate-50 rounded-[14px] border border-slate-200 transition-all duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.08)] hover:-translate-y-0.5 max-[900px]:gap-5 max-[900px]:p-5 max-md:flex-col max-md:items-center max-md:text-center max-md:gap-4 max-md:p-5 max-[480px]:p-4 ${collapsed[candidate.key] ? 'cursor-pointer' : ''}`}
           >
             <div className="w-[100px] h-[100px] bg-gradient-to-br from-slate-200 to-slate-300 rounded-full shrink-0 overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.1)] border-[3px] border-white max-[900px]:w-20 max-[900px]:h-20 max-md:w-[90px] max-md:h-[90px] max-[480px]:w-20 max-[480px]:h-20">
               <img src={candidate.image} alt={candidate.name} className="w-full h-full object-cover" />
@@ -64,7 +65,7 @@ function Category4() {
                   {candidate.name}
                 </h3>
                 <button
-                  onClick={() => setCollapsed(prev => ({ ...prev, [candidate.key]: !prev[candidate.key] }))}
+                  onClick={(e) => { e.stopPropagation(); setCollapsed(prev => ({ ...prev, [candidate.key]: !prev[candidate.key] })) }}
                   className="ml-2 max-md:ml-0 shrink-0 p-1 text-gray-400 hover:text-[#1a1a2e] transition-colors duration-200"
                   aria-label={collapsed[candidate.key] ? 'Expandir' : 'Colapsar'}
                 >
