@@ -139,6 +139,16 @@ exports.updateApoyo = onSchedule({
   await updateCategory(9);
 });
 
+// Scheduled function: Update Gabinete - runs at 19:00 UTC
+exports.updateGabinete = onSchedule({
+  schedule: '0 19 * * *',
+  timeZone: 'America/Bogota',
+  region: 'us-central1',
+  timeoutSeconds: 540
+}, async (event) => {
+  await updateCategory(10);
+});
+
 // HTTP trigger for manual updates
 exports.manualUpdate = onRequest({
   region: 'us-central1',
@@ -162,10 +172,10 @@ exports.manualUpdate = onRequest({
 
   const categoryIndex = parseInt(categoryParam, 10);
 
-  if (isNaN(categoryIndex) || categoryIndex < 0 || categoryIndex > 9) {
+  if (isNaN(categoryIndex) || categoryIndex < 0 || categoryIndex > 10) {
     res.status(400).json({
       error: 'Invalid category parameter',
-      valid: '0=Candidates, 1=Escandalos, 2=Experiencia, 3=Educacion, 4=Salud, 5=Seguridad, 6=Energia, 7=Vicepresidente, 8=Noticias, 9=Apoyo'
+      valid: '0=Candidates, 1=Escandalos, 2=Experiencia, 3=Educacion, 4=Salud, 5=Seguridad, 6=Energia, 7=Vicepresidente, 8=Noticias, 9=Apoyo, 10=Gabinete'
     });
     return;
   }

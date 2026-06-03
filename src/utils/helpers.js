@@ -45,6 +45,7 @@ export const getEnergia = (last_name) => getFromCollection('Energia', last_name)
 export const getVicepresidente = (last_name) => getFromCollection('Vicepresidente', last_name)
 export const getNoticias = (last_name) => getFromCollection('Noticias', last_name)
 export const getApoyo = (last_name) => getFromCollection('Apoyo', last_name)
+export const getGabinete = (last_name) => getFromCollection('Gabinete', last_name)
 
 /**
  * Load all candidates using the provided getter function.

@@ -36,7 +36,8 @@ const COLLECTIONS = [
   'Energia',       // 6 - Energía y cambio climático
   'Vicepresidente', // 7 - Vicepresidente
   'Noticias',      // 8 - Noticias
-  'Apoyo'          // 9 - Figuras de apoyo
+  'Apoyo',         // 9 - Figuras de apoyo
+  'Gabinete'       // 10 - Ministros
 ];
 
 /**

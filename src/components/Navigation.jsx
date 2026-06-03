@@ -22,6 +22,7 @@ const TOP_ITEMS = [
   { path: '/category7', label: 'Vicepresidente' },
   { path: '/category8', label: 'Noticias' },
   { path: '/category9', label: 'Apoyo' },
+  { path: '/category10', label: 'Ministros' },
 ]
 
 const PROPUESTAS_ITEMS = [

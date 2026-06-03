@@ -52,5 +52,10 @@ service cloud.firestore {
       allow read: if true;
       allow write: if false;
     }
+
+    match /Gabinete/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
   }
 }

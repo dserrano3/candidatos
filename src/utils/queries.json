@@ -1,16 +1,16 @@
 {
   "general": [
-    "En no más de 20 líneas, quiero saber la información más importante y relevante para elecciones del Candidato presidencial <candidato>",
-    "En no más de 20 líneas, quiero saber un resumen de todos los escándalos políticos y legales de <candidato>",
-    "En no más de 20 líneas, quiero saber los cargos más importantes que <candidato> ha ocupado. Haz un simple resumen de cada cargo ocupado.",
-    "En no más de 20 líneas, quiero saber las propuestas de educación que <candidato> tiene para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber las propuestas de salud que <candidato> tiene para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber las propuestas de seguridad que <candidato> tiene para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber las propuestas de energia y cambio climatico que <candidato> tiene para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber un resumen del vicepresidente escogido por <candidato>  para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber las ultimas noticias mas relevantes de <candidato>  para las elecciones de Colombia.",
-    "En no más de 20 líneas, quiero saber las figuras mas importantes que apoyan a <candidato>  para las elecciones de Colombia."
-
+    "En no más de 30 líneas, quiero saber la información más importante y relevante para elecciones del Candidato presidencial <candidato>",
+    "En no más de 30 líneas, quiero saber un resumen de todos los escándalos políticos y legales de <candidato>",
+    "En no más de 30 líneas, quiero saber los cargos más importantes que <candidato> ha ocupado. Haz un simple resumen de cada cargo ocupado.",
+    "En no más de 30 líneas, quiero saber las propuestas de educación que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber las propuestas de salud que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber las propuestas de seguridad que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber las propuestas de energia y cambio climatico que <candidato> tiene para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber un resumen del vicepresidente escogido por <candidato>  para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber las ultimas noticias mas relevantes de <candidato>  para las elecciones de Colombia.",
+    "En no más de 30 líneas, quiero saber las figuras mas importantes que apoyan a <candidato>  para las elecciones de Colombia.",
+    "En no más de 30 líneas, que ministros ha anunciado <candidato>  para las elecciones de Colombia en caso de ser presidente."
   ],
   "names": ["Iván Cepeda", "Abelardo de la Espriella"]
 }
