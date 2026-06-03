@@ -1,6 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { RiLightbulbFlashFill } from '@remixicon/react'
+
+const ELECTION_DATE = new Date('2026-06-21T00:00:00')
+
+function getTimeLeft() {
+  const diff = ELECTION_DATE - new Date()
+  if (diff <= 0) return null
+  return {
+    days: Math.floor(diff / 86400000),
+    hours: Math.floor((diff % 86400000) / 3600000),
+    minutes: Math.floor((diff % 3600000) / 60000),
+    seconds: Math.floor((diff % 60000) / 1000),
+  }
+}
 
 const NAV_ITEMS = [
   { path: '/', label: 'Resumen' },
@@ -14,7 +27,13 @@ const NAV_ITEMS = [
 
 function Navigation({ onInfoClick }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft)
   const location = useLocation()
+
+  useEffect(() => {
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   const toggleMenu = () => setIsOpen(!isOpen)
   const closeMenu = () => setIsOpen(false)
@@ -37,6 +56,17 @@ function Navigation({ onInfoClick }) {
               </button>
             )}
           </div>
+          {location.pathname === '/' && timeLeft && (
+            <div className="flex items-center gap-3 mt-0.5">
+              <span className="text-emerald-600 text-[1rem] font-semibold tracking-tight">
+                Segunda vuelta
+              </span>
+              <span className="text-gray-300 text-sm">·</span>
+              <span className="font-mono text-[0.85rem] text-gray-500 tabular-nums">
+                {timeLeft.days}d {String(timeLeft.hours).padStart(2, '0')}h {String(timeLeft.minutes).padStart(2, '0')}m {String(timeLeft.seconds).padStart(2, '0')}s
+              </span>
+            </div>
+          )}
           <p className="text-gray-400 text-[0.8rem] font-medium uppercase tracking-wide m-0">
             Elecciones presidenciales Colombia 2026
           </p>
