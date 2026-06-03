@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { RiLightbulbFlashFill } from '@remixicon/react'
+import { RiLightbulbFlashFill, RiArrowDownSLine } from '@remixicon/react'
 
 const ELECTION_DATE = new Date('2026-06-21T00:00:00')
 
@@ -15,28 +15,54 @@ function getTimeLeft() {
   }
 }
 
-const NAV_ITEMS = [
+const TOP_ITEMS = [
   { path: '/', label: 'Resumen' },
   { path: '/category1', label: 'Escándalos' },
   { path: '/category2', label: 'Experiencia' },
+  { path: '/category7', label: 'Vicepresidente' },
+  { path: '/category8', label: 'Noticias' },
+  { path: '/category9', label: 'Apoyo' },
+]
+
+const PROPUESTAS_ITEMS = [
   { path: '/category3', label: 'Educación' },
   { path: '/category4', label: 'Salud' },
   { path: '/category5', label: 'Seguridad' },
-  { path: '/category6', label: 'Energía' }
+  { path: '/category6', label: 'Energía' },
 ]
+
+const activeClass = 'bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] shadow-[0_2px_8px_rgba(26,26,46,0.3)]'
+const inactiveClass = 'bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-[0_2px_8px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(16,185,129,0.4)] hover:from-emerald-600 hover:to-emerald-700'
 
 function Navigation({ onInfoClick }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [propuestasOpen, setPropuestasOpen] = useState(false)
   const [timeLeft, setTimeLeft] = useState(getTimeLeft)
   const location = useLocation()
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setPropuestasOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   const toggleMenu = () => setIsOpen(!isOpen)
-  const closeMenu = () => setIsOpen(false)
+  const closeMenu = () => {
+    setIsOpen(false)
+    setPropuestasOpen(false)
+  }
+
+  const isPropuestasActive = PROPUESTAS_ITEMS.some(item => item.path === location.pathname)
 
   return (
     <nav className="my-10 relative max-md:my-6">
@@ -77,7 +103,7 @@ function Navigation({ onInfoClick }) {
 
         {/* Hamburger — hidden on desktop, visible on mobile */}
         <button
-          className="hidden max-md:flex relative w-6 h-5 bg-transparent border-none cursor-pointer p-0 z-[1001] shrink-0 ml-4"
+          className={`hidden max-md:flex w-6 h-5 bg-transparent border-none cursor-pointer p-0 z-[1001] shrink-0 ${isOpen ? 'fixed top-6 right-5' : 'relative ml-4'}`}
           onClick={toggleMenu}
           aria-label="Menú de navegación"
         >
@@ -100,7 +126,8 @@ function Navigation({ onInfoClick }) {
           isOpen ? 'max-md:translate-x-0' : 'max-md:translate-x-full',
         ].join(' ')}
       >
-        {NAV_ITEMS.map((item) => {
+        {/* Top-level items */}
+        {TOP_ITEMS.map((item) => {
           const isActive = location.pathname === item.path
           return (
             <li key={item.path}>
@@ -112,9 +139,7 @@ function Navigation({ onInfoClick }) {
                   'transition-all duration-300',
                   'max-md:py-4 max-md:px-5 max-md:text-base max-md:rounded-lg',
                   'min-h-[48px] flex items-center justify-center max-md:justify-start',
-                  isActive
-                    ? 'bg-gradient-to-br from-[#1a1a2e] to-[#2d2d44] shadow-[0_2px_8px_rgba(26,26,46,0.3)]'
-                    : 'bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-[0_2px_8px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(16,185,129,0.4)] hover:from-emerald-600 hover:to-emerald-700',
+                  isActive ? activeClass : inactiveClass,
                 ].join(' ')}
               >
                 {item.label}
@@ -122,6 +147,86 @@ function Navigation({ onInfoClick }) {
             </li>
           )
         })}
+
+        {/* Propuestas dropdown */}
+        <li className="relative" ref={dropdownRef}>
+          {/* Desktop: button + floating panel */}
+          <div className="max-md:hidden">
+            <button
+              onClick={() => setPropuestasOpen(!propuestasOpen)}
+              className={[
+                'py-3.5 px-7 text-white rounded-xl font-medium text-[0.95rem]',
+                'transition-all duration-300 cursor-pointer border-none',
+                'min-h-[48px] flex items-center justify-center gap-1',
+                isPropuestasActive || propuestasOpen ? activeClass : inactiveClass,
+              ].join(' ')}
+            >
+              Propuestas
+              <RiArrowDownSLine size={16} className={`transition-transform duration-200 ${propuestasOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {propuestasOpen && (
+              <div className="absolute top-full left-0 mt-2 bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden z-50 min-w-[160px]">
+                {PROPUESTAS_ITEMS.map(item => {
+                  const isActive = location.pathname === item.path
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={() => setPropuestasOpen(false)}
+                      className={[
+                        'block px-5 py-3 text-[0.9rem] font-medium no-underline transition-colors duration-200',
+                        isActive
+                          ? 'bg-[#1a1a2e] text-white'
+                          : 'text-gray-700 hover:bg-emerald-50 hover:text-emerald-700',
+                      ].join(' ')}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Mobile: accordion inside slide-out */}
+          <div className="md:hidden flex flex-col gap-1">
+            <button
+              onClick={() => setPropuestasOpen(!propuestasOpen)}
+              className={[
+                'w-full py-4 px-5 text-white rounded-lg font-medium text-base',
+                'transition-all duration-300 cursor-pointer border-none',
+                'min-h-[48px] flex items-center justify-between',
+                isPropuestasActive || propuestasOpen ? activeClass : inactiveClass,
+              ].join(' ')}
+            >
+              Propuestas
+              <RiArrowDownSLine size={18} className={`transition-transform duration-200 ${propuestasOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {propuestasOpen && (
+              <div className="ml-4 flex flex-col gap-1">
+                {PROPUESTAS_ITEMS.map(item => {
+                  const isActive = location.pathname === item.path
+                  return (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      onClick={closeMenu}
+                      className={[
+                        'block py-3 px-5 text-white no-underline rounded-lg font-medium text-base',
+                        'transition-all duration-300 min-h-[48px] flex items-center',
+                        isActive ? activeClass : inactiveClass,
+                      ].join(' ')}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+        </li>
       </ul>
 
       {isOpen && (

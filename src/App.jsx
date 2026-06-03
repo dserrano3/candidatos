@@ -7,6 +7,9 @@ import Category3 from './pages/Category3'
 import Category4 from './pages/Category4'
 import Category5 from './pages/Category5'
 import Category6 from './pages/Category6'
+import Category7 from './pages/Category7'
+import Category8 from './pages/Category8'
+import Category9 from './pages/Category9'
 
 function App() {
   const location = useLocation()
@@ -27,6 +30,9 @@ function App() {
         <Route path="/category4" element={<Category4 />} />
         <Route path="/category5" element={<Category5 />} />
         <Route path="/category6" element={<Category6 />} />
+        <Route path="/category7" element={<Category7 />} />
+        <Route path="/category8" element={<Category8 />} />
+        <Route path="/category9" element={<Category9 />} />
       </Routes>
     </div>
   )

@@ -33,7 +33,10 @@ const COLLECTIONS = [
   'Educacion',     // 3 - Educación
   'Salud',         // 4 - Salud
   'Seguridad',     // 5 - Seguridad
-  'Energia'        // 6 - Energía y cambio climático
+  'Energia',       // 6 - Energía y cambio climático
+  'Vicepresidente', // 7 - Vicepresidente
+  'Noticias',      // 8 - Noticias
+  'Apoyo'          // 9 - Figuras de apoyo
 ];
 
 /**
