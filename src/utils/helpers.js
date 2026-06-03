@@ -6,7 +6,7 @@ import { collection, query, where, orderBy, limit, getDocs } from 'firebase/fire
 import { db } from '../config/firebase'
 
 // Candidate last names used across the app
-export const CANDIDATE_NAMES = ['Cepeda', 'Espriella', 'Valencia', 'Fajardo', 'Lopez']
+export const CANDIDATE_NAMES = ['Cepeda', 'Espriella']
 
 /**
  * Get the most recent summary and sources by last name from a collection

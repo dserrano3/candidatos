@@ -85,7 +85,7 @@ function delay(ms) {
 }
 
 // Candidate last names used across the app
-const CANDIDATE_NAMES = ['Cepeda', 'Espriella', 'Valencia', 'Fajardo', 'Lopez'];
+const CANDIDATE_NAMES = ['Cepeda', 'Espriella'];
 
 module.exports = {
   sendGeneralQuery,

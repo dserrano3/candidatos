@@ -8,9 +8,6 @@ import Footer from '../components/Footer'
 const CANDIDATE_INFO = [
   { key: 'cepeda', name: 'Cepeda', image: '/cepeda.jpg' },
   { key: 'espriella', name: 'Espriella', image: '/espriella.jpg' },
-  { key: 'valencia', name: 'Valencia', image: '/valencia.jpg' },
-  { key: 'fajardo', name: 'Fajardo', image: '/fajardo.jpg' },
-  { key: 'lopez', name: 'López', image: '/lopez.png' }
 ]
 
 function shuffle(array) {
@@ -26,9 +23,6 @@ function Category1() {
   const [candidates, setCandidates] = useState({
     cepeda: { summary: 'Cargando...', sources: [] },
     espriella: { summary: 'Cargando...', sources: [] },
-    valencia: { summary: 'Cargando...', sources: [] },
-    fajardo: null,
-    lopez: null
   })
 
   const [collapsed, setCollapsed] = useState(() => Object.fromEntries(CANDIDATE_INFO.map(c => [c.key, true])))
